@@ -1,0 +1,43 @@
+settingsinfo:
+  address: localhost
+  port: 5432
+  user: rssuser
+  password: rssuser
+
+spring:
+  datasource:
+    initialization-mode: always
+    username: rssuser
+    password: rssuser
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://Log-Monitor-Database:5432/logdb?characterEncoding=UTF-8
+  jpa:
+    properties:
+      hibernate:
+        #format_sql: true
+        default_schema: log_manager
+    #show-sql: true
+    hibernate:
+      ddl-auto: update
+  servlet:
+    multipart:
+      max-file-size: -1
+      max-request-size: -1
+        #logging:
+        #level:
+        #org:
+        #hibernate:
+        #type:
+        #descriptor:
+      #sql: trace
+
+file:
+  upload-dir: /CANON/LOGMONITOR/FILES/uploads
+  download-dir: /CANON/LOGMONITOR/FILES/downloads
+  file-delete-scheduled: 0 0 0 * * *
+
+manager:
+  log-collect-before: 30
+
+cras-support:
+  application: /CANON/CRAS/APP/cras.tar
