@@ -1,0 +1,8 @@
+rootProject.name = 'rssportal'
+
+include 'fileservicecommon'
+include 'fileservicecommonweb'
+include 'fileservicecollect'
+include 'fileservicemanage'
+include 'logfilecollectcommand'
+include 'servicemanager'

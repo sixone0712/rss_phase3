@@ -1,0 +1,138 @@
+
+                                 RELEASE NOTES
+                             Remote Support System 
+
+These release notes are for the current development version of 
+Remote Support System
+
+--------------------------------------------------------------------------------------------
+Date: 2021/06/11
+Version: 2.1.1
+*	New features
+	1) Changed ESP and OTS ftp file transfer to rest api.
+	2) Added to the installation script to change the httpd port of OTS.
+
+*	Bug Fixed
+	1) Changed the JavaScript format to utf-8.
+
+Date: 2020/03/12
+Version: 2.1.0
+*	New features
+  1) Navigation Bar
+   - Server Time
+  2) Manual Download
+   - FTP
+    ◎ MPA Connection Status
+    ◎ Folder Search
+    ◎ File Name Sort
+   - VFTP SSS
+    ◎ MPA Connection Status
+   - VFTP SSS
+    ◎ Machine Connection Status
+    ◎ File Name Sort
+    ◎ MPA Connection Status
+  3) Auto Download
+   - End Period Setting
+   - Split compression
+	4) Administrator
+	- System Diagram
+	  ◎ OTS, MPA Connection Status
+	- User Permission Change
+	  ◎ Normal User Permission : Manual Download (FTP), Manual Download (VFTP), Auto Download
+	  ◎ Administrator Permission : System Log Download, System Restart (OS/Docker), Account Setting
+	                               System Config Setting
+
+--------------------------------------------------------------------------------------------
+Date: 2020/12/04
+Version: 2.0.1
+*	New features
+	1) Administrator
+	- System Diagram
+	- Category List
+	- Import/Export System Configuration File
+	- Service Manager
+	  ◎ Docker Container Restart
+    ◎ OS Restart
+	  ◎ Debug Log Download
+	  
+*	Bug Fixed
+	1) Fixed an issue with download for MPA Time Difference
+
+--------------------------------------------------------------------------------------------
+Date: 2020/11/24
+Version: 1.1.2
+*	Bug Fixed
+	1) Fixed an issue with purging downloaded file.
+	
+--------------------------------------------------------------------------------------------
+Date: 2020/11/20
+Version: 1.1.1
+*	Bug Fixed
+	1) Fixed an issue that Problems with access to Rapid Collector Web Page.
+
+--------------------------------------------------------------------------------------------
+Date: 2020/09/11
+Version: 1.1.0
+*	New features
+	1) Manual Download
+	- VFTP Compat Download
+	- VFTP SSS Download
+	2) Auto Download
+	- VFTP Compat Download
+	- VFTP SSS Download
+	3) Add RESTful API
+	4) Add Token Authentication
+
+--------------------------------------------------------------------------------------------
+
+Date: 2020/08/24
+Version: 1.0.3
+
+*	Bug Fixed
+	1) Fixed an issue where Machine was not displayed when only 1 FabName was existed.
+
+--------------------------------------------------------------------------------------------
+
+Date: 2020/07/02
+Version: 1.0.2
+
+*	Bug Fixed
+	1) Fixed an issue could not download the subfolder of the Category
+
+--------------------------------------------------------------------------------------------
+
+Date: 2020/06/16
+Version: 1.0.1
+
+*	Bug Fixed
+	1) Fixed an issue that New Account button was not displayed on the User Account page
+	   when there was no user
+	2) Fixed an issue that included unnecessary data in the downloaded log file.
+	3) Fixed an issue where the Target Lists were overlapped on the Plan Settings page.
+	
+--------------------------------------------------------------------------------------------
+Date: 2020/06/12
+Version: 1.0.0
+*	New features
+	1) Manual Download
+	- FTP Download
+	2) Auto Download
+	- FTP Download
+	3) Administrator
+	- User Account
+	- Download History
+	
+*	Install Applications
+	1) Tomcat : 9.0.35
+	
+*	Web Application Environments
+	1) Spring Boot : 2.2.5
+	2) React : 16.13.0
+
+*	System Requirements
+	1) OS : CentOS 7.0
+	2) HTTP Server : Apache 2.4
+	3) RDBMS : PostgreSQL 9.2.4-1
+	4) JDK : openJDK 1.8.0_181
+
+--------------------------------------------------------------------------------------------

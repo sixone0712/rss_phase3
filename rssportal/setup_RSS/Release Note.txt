@@ -1,0 +1,73 @@
+
+                                 RELEASE NOTES
+                             Remote Support System 
+
+These release notes are for the current development version of 
+Remote Support System
+
+--------------------------------------------------------------------------------------------
+Date: 2020/09/11
+Version: 1.1.0
+*	New features
+	1) Manual Download
+	- VFTP Compat Download
+	- VFTP SSS Download
+	2) Auto Download
+	- VFTP Compat Download
+	- VFTP SSS Download
+	3) Add RESTful API
+	4) Add Token Authentication
+
+--------------------------------------------------------------------------------------------
+
+Date: 2020/08/24
+Version: 1.0.3
+
+*	Bug Fixed
+	1) Fixed an issue where Machine was not displayed when only 1 FabName was existed.
+
+--------------------------------------------------------------------------------------------
+
+Date: 2020/07/02
+Version: 1.0.2
+
+*	Bug Fixed
+	1) Fixed an issue could not download the subfolder of the Category
+
+--------------------------------------------------------------------------------------------
+
+Date: 2020/06/16
+Version: 1.0.1
+
+*	Bug Fixed
+	1) Fixed an issue that New Account button was not displayed on the User Account page
+	   when there was no user
+	2) Fixed an issue that included unnecessary data in the downloaded log file.
+	3) Fixed an issue where the Target Lists were overlapped on the Plan Settings page.
+	
+--------------------------------------------------------------------------------------------
+Date: 2020/06/12
+Version: 1.0.0
+*	New features
+	1) Manual Download
+	- FTP Download
+	2) Auto Download
+	- FTP Download
+	3) Administrator
+	- User Account
+	- Download History
+	
+*	Install Applications
+	1) Tomcat : 9.0.35
+	
+*	Web Application Environments
+	1) Spring Boot : 2.2.5
+	2) React : 16.13.0
+
+*	System Requirements
+	1) OS : CentOS 7.0
+	2) HTTP Server : Apache 2.4
+	3) RDBMS : PostgreSQL 9.2.4-1
+	4) JDK : openJDK 1.8.0_181
+
+--------------------------------------------------------------------------------------------

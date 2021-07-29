@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="dlHistory">
+
+    <select id="selectAll" resultType="DownloadHistoryVo">
+        select * from rsss."download_history" where validity is true order by dl_date DESC
+    </select>
+
+    <select id="select" resultType="DownloadHistoryVo">
+        select * from rsss."download_history"
+        where and id = #{id}
+    </select>
+
+    <select id="getTotalCnt" resultType="int">
+        select count(*) from rsss."download_history" where validity is true
+    </select>
+
+
+    <insert id="insert" parameterType="DownloadHistoryVo">
+        insert into rsss."download_history" (
+                dl_user
+                ,dl_date
+                ,dl_type
+                ,dl_filename
+                ,validity
+                ,dl_status
+            ) values (
+                #{dl_user}
+                ,now()
+                ,#{dl_type}
+                ,#{dl_filename}
+                ,true
+                ,#{dl_status}
+        )
+    </insert>
+
+    <delete id="delete">
+        delete
+            from rsss."download_history"
+            where id = #{id}
+    </delete>
+
+    <insert id="insertConfigLog" parameterType="ConfigHistoryVo">
+        insert into rsss."config_history" (
+                username
+                ,date
+                ,type
+                ,filename
+                ,validity
+            ) values (
+                #{user}
+                ,now()
+                ,#{type}
+                ,#{filename}
+                ,true
+        )
+    </insert>
+
+</mapper>

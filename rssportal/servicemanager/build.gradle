@@ -1,0 +1,89 @@
+plugins {
+    id 'org.springframework.boot'
+    id 'io.spring.dependency-management'
+    id 'java'
+    id 'war'
+    id 'jacoco'
+}
+
+group = 'jp.co.canon.cks.eec.fs'
+sourceCompatibility = '1.8'
+
+String git_rev = 'git rev-parse --verify --long HEAD'.execute().text.trim();
+
+bootWar {
+    archiveFileName = "servicemanager.war"
+    manifest {
+        attributes("Implementation-Version": project.version)
+        attributes("GIT-REV": git_rev)
+    }
+}
+
+configurations {
+    developmentOnly
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.apache.httpcomponents:httpclient:4.5.12'
+    implementation 'org.apache.commons:commons-exec:1.3'
+    implementation 'commons-io:commons-io:2.7'
+    implementation 'com.jcraft:jsch:0.1.55'
+    implementation project(':fileservicecommon')
+    compileOnly 'org.projectlombok:lombok'
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
+    annotationProcessor 'org.projectlombok:lombok'
+    providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
+    testImplementation('org.springframework.boot:spring-boot-starter-test') {
+        exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+    }
+    compile group: 'com.google.code.gson', name: 'gson', version: '2.8.6'
+}
+
+test {
+    useJUnitPlatform()
+}
+
+task yarn_install_servicemanager(type:Exec){
+    workingDir "front"
+    commandLine 'cmd', '/c', 'yarn install'
+}
+
+task yarn_build_servicemanager(type:Exec, dependsOn: [
+        'yarn_install_servicemanager'
+]){
+    workingDir "front"
+    commandLine 'cmd', "/c", "yarn build"
+}
+
+task copy_webfiles(type:Copy, dependsOn: [
+        'yarn_build_servicemanager'
+]){
+    from 'front/build'
+    into 'src/main/resources/static'
+}
+
+task copy_war(type:Copy, dependsOn: [
+        'bootWar'
+]) {
+    from 'build/libs/servicemanager.war'
+    into '../docker/build'
+}
+
+task prepare(dependsOn: [
+        'copy_webfiles'
+]) {
+
+}
+
+task release(dependsOn: [
+        copy_war
+]) {
+}

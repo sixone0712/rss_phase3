@@ -1,0 +1,9 @@
+spring:
+  profiles:
+    active: dev
+server:
+  servlet:
+    contextPath:
+fileservice:
+  structureFile: /CANON/ENV/structure.json
+  categoriesFile: /CANON/ENV/categories.json

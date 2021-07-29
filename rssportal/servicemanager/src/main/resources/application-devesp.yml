@@ -1,0 +1,9 @@
+server:
+  port: 8080
+  servlet:
+    contextPath: /servicemanager
+servicemanager:
+  type: "ESP"
+  diskUsageDirectory: /CANON/LOG
+  espContainerNameList: Database, Rapid-Collector
+  otsContainerNameList: FileServiceCollect

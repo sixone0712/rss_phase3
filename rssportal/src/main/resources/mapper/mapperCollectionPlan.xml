@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="colplan">
+
+    <sql id="selectFields">
+        id,
+        plantype as planType,
+        planname,
+        fab,
+        tool,
+        logtype,
+        logtypestr as logTypeStr,
+        description,
+        collecttype as collectionType,
+        cinterval as interval,
+        ownerid as owner,
+        stop,
+        tscollectstart as collectStart,
+        tscreated as created,
+        tsstart as start,
+        tsend as end,
+        tslastcollect as lastCollect,
+        tsnext as nextAction,
+        tslastpoint as lastPoint,
+        laststatus as detail,
+        laststatus as lastStatus,
+        command,
+        directory,
+        lasttimestamp as lastTimestamp,
+        separatedzip as separatedZip,
+        case when laststatus='halted' or laststatus='completed' or stop=true then 'stop' else 'running' end as status,
+        case when collecttype=1 then 'cycle' else 'continuous' end as collectTypeStr
+    </sql>
+
+    <select id="exists" resultType="boolean">
+        select exists (select * from information_schema.tables where table_schema='rsss' and table_name='collection_plan')
+    </select>
+
+    <select id="selectAll" resultType="CollectPlanVo">
+        select
+            <include refid="selectFields" />
+        from rsss."collection_plan"
+        order by id desc
+    </select>
+
+    <select id="selectAllOptions" parameterType="hashmap" resultType="CollectPlanVo">
+        select
+            <include refid="selectFields" />
+
+        from rsss."collection_plan" as t_collect
+        order by
+        <if test="order!=null and order==true">
+            t_collect.tsnext,
+        </if>
+            t_collect.id desc
+        <if test="limit!=null">
+        limit #{limit}
+        </if>
+    </select>
+
+    <select id="selectId" parameterType="Integer" resultType="CollectPlanVo">
+        select
+            <include refid="selectFields" />
+
+        from rsss."collection_plan"
+        where id=#{id}
+    </select>
+
+    <insert id="insert" parameterType="CollectPlanVo">
+        <selectKey keyProperty="id" resultType="Integer" order="BEFORE">
+            select nextval('rsss.collection_plan_id_seq')
+        </selectKey>
+        insert into rsss."collection_plan" (
+            id,
+            plantype,
+            planname,
+            fab,
+            tool,
+            logtype,
+            logtypestr,
+            tscreated,
+            description,
+            collecttype,
+            cinterval,
+            tscollectstart,
+            tsstart,
+            tsend,
+            ownerid,
+            tsnext,
+            tslastpoint,
+            command,
+            directory,
+            lasttimestamp,
+            separatedzip
+        ) values (
+            #{id},
+            #{planType},
+            #{planName},
+            #{fab},
+            #{tool},
+            #{logType},
+            #{logTypeStr},
+            now(),
+            #{description},
+            #{collectionType},
+            #{interval},
+            #{collectStart},
+            #{start},
+            #{end},
+            #{owner},
+            #{nextAction},
+            #{lastPoint},
+            #{command},
+            #{directory},
+            null,
+            #{separatedZip}
+        )
+    </insert>
+
+    <update id="update" parameterType="CollectPlanVo">
+        update rsss."collection_plan" set
+            planname = #{planName},
+            fab = #{fab},
+            tool = #{tool},
+            logtype = #{logType},
+            logtypestr = #{logTypeStr},
+            tscreated = now(),
+            description = #{description},
+            collecttype = #{collectionType},
+            cinterval = #{interval},
+            tscollectstart = #{collectStart},
+            tsstart = #{start},
+            tsend = #{end},
+            ownerid = #{owner},
+            tsnext = #{nextAction},
+            tslastpoint = #{lastPoint},
+            <if test="command!=null">
+                command = #{command},
+            </if>
+            <if test="directory!=null">
+                directory = #{directory},
+            </if>
+            <if test="lastStatus!=null">
+                laststatus = #{lastStatus},
+            </if>
+            <if test="lastTimestamp!=null">
+                lasttimestamp = #{lastTimestamp},
+            </if>
+            tslastcollect = #{lastCollect},
+            stop = #{stop},
+            separatedzip = #{separatedZip}
+        where id = #{id}
+    </update>
+
+    <update id="updateStatus" parameterType="CollectPlanVo">
+        update rsss."collection_plan" set
+            laststatus = #{lastStatus}
+        where id = #{id}
+    </update>
+
+    <update id="updateInfo" parameterType="CollectPlanVo">
+        update rsss."collection_plan" set
+            stop = #{stop},
+          <if test="lastStatus!=null">
+            laststatus = #{lastStatus},
+          </if>
+            tslastcollect = #{lastCollect},
+            tsnext = #{nextAction},
+            tslastpoint = #{lastPoint},
+            lasttimestamp = #{lastTimestamp}
+        where id = #{id}
+    </update>
+
+    <delete id="delete" parameterType="Integer">
+        delete from rsss."collection_plan" where id=#{id}
+    </delete>
+
+    <select id="columns" resultType="HashMap">
+        select * from information_schema.columns where table_schema='rsss' and table_name='collection_plan'
+    </select>
+</mapper>

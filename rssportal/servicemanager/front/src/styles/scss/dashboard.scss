@@ -1,0 +1,109 @@
+.dashboard {
+  .dashboard-header {
+    height: 56px;
+    box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.2), 0 4px 5px 0 rgba(0, 0, 0, 0.14),
+    0 1px 10px 0 rgba(0, 0, 0, 0.12);
+    z-index: 500;
+  }
+  .dashboard-footer {
+    min-width: 1050px;
+    height: 50px;
+    padding-top: 0;
+    padding-bottom: 0;
+    background-color: white;
+
+    .text {
+      height: 50px;
+    }
+  }
+
+  .system-info {
+    .content-divider-top {
+      margin-top: 0
+    }
+    .content-divider-bottom {
+      margin-bottom: 0
+    }
+
+    .status-table {
+      padding: 0 100px;
+      min-height: 280px;
+
+      .status-table-layout {
+        //height: 360px;  // remove for multiple line name
+        min-width: 950px;
+      }
+      .status-table-bread {
+        margin: 10px 0;
+      }
+
+      .status-table-button-row {
+        margin-bottom: 10px;
+        .refresh-button {
+          margin-bottom: 10px;
+        }
+      }
+
+      .status-color.up {
+        color: #90EE90  // LightGreen
+      }
+
+      .status-color.exited {
+        color: #FF4500; // OragneRed
+      }
+
+      .status-color.unknown {
+        color: #778899; // LightSlateGray
+      }
+      .status-color-text {
+        padding-left: 5px;
+      }
+
+    }
+
+    .system-log {
+      padding: 0 100px;
+      min-height: 280px;
+
+      .log-dl-layout {
+        min-width: 950px;
+
+        .log-dl-sider {
+          overflow: auto;
+          height: 453px;
+
+          .log-dl-sider-loading {
+            display: flex;
+            justify-content: center;
+            height: 100%;
+            align-items: center;
+          }
+          .log-dl-sider-menu {
+            height: 100%;
+          }
+        }
+
+        .log-dl-table {
+          padding-left: 24px;
+          margin: 0;
+          min-height: 280px;
+
+          .log-dl-table-bread {
+            margin: 10px 0;
+          }
+
+          .log-dl-table-list {
+            .button-row {
+              margin-bottom: 10px;
+              .button-col {
+                margin-left: 10px;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+

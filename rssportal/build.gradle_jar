@@ -1,0 +1,119 @@
+plugins {
+    id 'org.springframework.boot' version '2.2.5.RELEASE'
+    id 'io.spring.dependency-management' version '1.0.9.RELEASE'
+    id 'java'
+    // Build War
+    //id 'war'
+    // UnitTest
+    id 'jacoco'
+}
+
+// Build War
+/*
+bootWar {
+     archiveBaseName = 'rssportal'
+    archiveFileName = 'rssportal.war'
+    archiveVersion = "1.0.2"
+    manifest {
+        attributes("RSS-Portal-Version": "1.0.2")
+    }
+}
+ */
+
+group = 'jp.co.canon.cks.eec.fs'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '1.8'
+
+configurations {
+    developmentOnly
+    runtimeClasspath {
+        extendsFrom developmentOnly
+    }
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-hateoas'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-web-services'
+    implementation project(':fileservicecommon')
+    implementation project(':fileservicecommonweb')
+    //compileOnly 'org.projectlombok:lombok'
+    implementation 'org.projectlombok:lombok'
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
+    annotationProcessor 'org.projectlombok:lombok'
+    // Build War
+    //providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
+    testImplementation('org.springframework.boot:spring-boot-starter-test') {
+        exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+    }
+    testRuntimeOnly('org.junit.platform:junit-platform-launcher')
+
+    // Build Jar
+    compile 'org.apache.tomcat.embed:tomcat-embed-jasper'
+    compile 'javax.servlet:jstl'
+
+    // Dummy
+    compile fileTree(dir: './src/libs', include: ['*.jar'])
+
+    compile group: 'org.postgresql', name: 'postgresql', version: '42.2.12'
+    compile group: 'org.mybatis', name: 'mybatis', version: '3.5.4'
+    compile group: 'org.mybatis', name: 'mybatis-spring', version: '2.0.4'
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-jdbc', version: '2.2.6.RELEASE'
+
+    // Sql logging
+    compile group: 'log4j', name: 'log4j', version: '1.2.17'
+
+    // XML to Json Parsing
+    compile group: 'org.codehaus.jackson', name: 'jackson-core-asl', version: '1.9.13'
+    compile group: 'org.json', name: 'json', version: '20190722'
+    compile group: 'org.apache.directory.studio', name: 'org.apache.commons.io', version: '2.4'
+
+    implementation 'com.google.code.gson:gson:2.8.6'
+    compile group: 'com.fasterxml.jackson.core', name: 'jackson-core', version: '2.11.1'
+    compile group: 'io.jsonwebtoken', name: 'jjwt', version: '0.9.1'
+
+}
+
+// UnitTest
+test {
+    useJUnitPlatform()
+}
+
+test {
+    finalizedBy jacocoTestReport
+}
+
+jacoco {
+    toolVersion = '0.8.5'
+}
+
+jacocoTestReport {
+    dependsOn test
+    
+    reports {
+        html.enabled true
+        xml.enabled false
+        csv.enabled false
+
+        html.destination file("$buildDir/jacocoHtml")
+    }
+
+    afterEvaluate {
+        classDirectories.from = files(classDirectories.files.collect {
+            fileTree(
+                dir: it,
+                exclude: [
+                    "jp/co/canon/cks/eec/fs/manage/**",
+                    "jp/co/canon/cks/eec/fs/portal/**",
+                    "jp/co/canon/cks/eec/util/ftp/**",
+                ])
+        })
+    }
+}

@@ -1,0 +1,57 @@
+export const RSS_SUCCESS = 0;
+export const RSS_FAIL = 1;
+
+export const RSS_TYPE_FTP_MANUAL = 1;
+export const RSS_TYPE_FTP_AUTO = 2;
+export const RSS_TYPE_VFTP_MANUAL_COMPAT = 3;
+export const RSS_TYPE_VFTP_MANUAL_SSS = 4;
+export const RSS_TYPE_VFTP_AUTO_COMPAT = 5;
+export const RSS_TYPE_VFTP_AUTO_SSS  = 6;
+
+export const COMMON_FAIL_SERVER_ERROR = 1000;
+export const COMMON_FAIL_NOT_FOUND = 1001;
+
+export const GENRE_SET_FAIL_NO_ITEM = 10;
+export const GENRE_SET_FAIL_SAME_NAME = 11;
+export const GENRE_SET_FAIL_EMPTY_NAME = 12;
+export const GENRE_SET_FAIL_SEVER_ERROR = 13;
+export const GENRE_SET_FAIL_NOT_SELECT_GENRE = 14;
+export const GENRE_SET_FAIL_PARAMETAR_ERROR = 15;
+export const GENRE_SET_FAIL_NOT_EXIST_GENRE = 16;
+export const GENRE_SET_FAIL_NEED_UPDATE = 17;
+export const GENRE_SET_FAIL_INVALID_NAME = 18;
+
+export const SEARCH_FAIL_NO_MACHINE_AND_CATEGORY = 20;
+export const SEARCH_FAIL_NO_MACHINE = 21;
+export const SEARCH_FAIL_NO_CATEGORY = 22;
+export const SEARCH_FAIL_DATE = 23;
+export const SEARCH_FAIL_SERVER_ERROR = 24;
+
+export const SEARCH_FAIL_NO_DATA_TYPE = 25;
+export const SEARCH_FAIL_NO_COMMAND = 25;
+
+export const FILE_FAIL_NO_ITEM = 30;
+export const FILE_FAIL_SERVER_ERROR = 31;
+
+export const LOGIN_FAIL_NO_USERNAME_PASSWORD = 32;
+export const LOGIN_FAIL_NO_REGISTER_USER = 33;
+export const LOGIN_FAIL_INCORRECT_PASSWORD = 34;
+export const LOGIN_FAIL_EMPTY_USER_PASSWORD = 35;
+
+export const CHANGE_PW_FAIL_EMPTY_PASSWORD = 40;
+export const CHANGE_PW_FAIL_INCORRECT_CURRENT_PASSWORD = 41;
+export const CHANGE_PW_FAIL_NOT_MATCH_NEW_PASSWORD = 42;
+export const CHANGE_PW_FAIL_CURRENT_NEW_SAME_PASSWORD = 43;
+
+
+export const DB_UPDATE_ERROR_NO_SUCH_USER = 100;
+
+
+export const COMMAND_FAIL_SAME_NAME = 200;
+export const COMMAND_FAIL_EMPTY_NAME = 201;
+export const COMMAND_NO_SUCH_COMMAND = 202;
+export const COMMAND_NO_SELECT_COMMAND = 203;
+export const COMMAND_EXIST_COMMAND = 204;
+
+export const USER_SET_FAIL_SAME_NAME = 300;
+export const USER_SET_FAIL_NO_REASON = 350;

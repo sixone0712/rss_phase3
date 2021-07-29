@@ -1,0 +1,47 @@
+HELP.md
+.gradle
+build/
+!gradle/wrapper/gradle-wrapper.jar
+!**/src/main/**
+!**/src/test/**
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+out/
+
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+
+### VS Code ###
+.vscode/
+/src/main/webapp/build/
+bin
+
+### Node Modules ###
+/node_modules
+/src/main/webapp/node_modules
+
+### Download ###
+/download
+/planroot
+/vfs-cache-dum
+/virt-cache
+/setup_RSS.tar.gz
+/src/main/webbuild/node_modules
+/servicemanager/src/main/resources/static

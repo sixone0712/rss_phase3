@@ -1,0 +1,185 @@
+log4j:
+  # A1 is set to be a ConsoleAppender.
+#  appender:
+#    A1: org.apache.log4j.ConsoleAppender
+#    A1.layout: org.apache.log4j.PatternLayout
+#    A1.layout.ConversionPattern: '%-4r %-5p %c - %m%n'
+  debug: true
+  logger:
+    org:
+      mybatis:
+        # MBG logging configuration...
+        generator: DEBUG
+  # Set root logger
+  rootLogger: DEBUG, stdout
+
+logging:
+  pattern:
+    console: "%d{yyy-MM-dd HH:mm:ss.SSS} [%-30.-30logger{0}] %-5level | %msg%n"
+
+test-version: Rapid_Collector_V20_04_02
+
+spring:
+  profiles:
+    active: release
+  datasource:
+    initialization-mode: always
+    driver-class-name: org.postgresql.Driver
+    password: 1234
+    platform: postgresql
+    username: rssadmin
+  http:
+    encoding:
+      charset:    UTF-8
+#  mvc:
+#    view:
+#      prefix:     /jsp/
+#      suffix:     .jsp
+
+server:
+  tomcat:
+    uri-encoding: UTF-8
+  servlet:
+    context-path: /rss
+
+rssportal:
+  jwt:
+    accessTokenExp: 240     # 4 Hour(Unit: Minute)
+    refreshTokenExp: 43200  # 30 Day(Unit: Minute)
+    autoRefresh:  1440      # 1 Day(Unit: Minute)
+    salt: rssportal
+  vftp:
+    #objectlistfile: /usr/local/canon/esp/CanonFileService/definitions/ObjectList.xml
+
+  # 'purger' is for cleaning up files that the app has already used in local file system.
+  purger:
+    # on every downloading files processing, the app uses local cache to keep files temporary.
+    # 'download-cache' configuration is to clean this cache up.
+    download-cache:
+      min-size: 10 # gigabytes
+      min-percent: 30
+      interval: 1800 # seconds
+      keeping-period: 24 # hours
+    # 'collect-plan' cleans up files that has completed downloading of auto-collection.
+    collect-plan:
+      min-size: 10 # gigabytes
+      min-percent: 30
+      interval: 3600 # seconds
+      keeping-period: 24 # hours
+    # `file-downloader` cleans up an output directory of downloading processing.
+    file-downloader:
+      min-size: 10 # gigabytes
+      min-percent: 30
+      interval: 3600 # seconds
+      keeping-period: 24 # hours
+
+  constructDisplayTree: Equipments, test
+  admin-init-password: 5f4dcc3b5aa765d61d8327deb882cf99   # password
+  admin-init-password-filename: /CANON/ENV/admin_password.json
+
+---
+spring:
+  profiles: dev
+  datasource:
+    # CKBS [set ip address]
+    url: jdbc:postgresql://10.1.31.218:5432/rssdb
+  # Hot reload
+  devtools:
+    livereload:
+      enabled: true
+  freemarker:
+    cache: false
+
+
+rssportal:
+  file-service-manager:
+    addr: 10.1.31.218
+  collect:
+    logBase: planroot
+    cacheBase: downloadcache
+    resultBase: zipa
+    max-threads: 4
+  file-collect-service:
+    # addr: localhost:8080
+    retry: 1 # retry count
+    retry-interval: 100 # interval between each retry
+  logging:
+    root: logs
+  downloader:
+    max-threads: 10
+  history:
+    cacheBase: history
+  configuration:
+    path: /CANON/ENV/
+    structureFile: structure.json
+    categoriesFile: categories.json
+  machine-status:
+    period: 60  # seconds
+    root: machines
+    keeping-period: 3600 # seconds
+  file-search:
+    max-jobs: 999
+    # When searching jobs finished, it stored the result into files in local storage.
+    # `storage-root` means the root path of the local storage.
+    storage-root: search
+    # The result file keeps for `keeping-period` hours below.
+    keeping-period: 1 # hours
+    # Every `purge-interval` minutes, the application checks whether there are files to purge or not.
+    purge-interval: 5 # minutes
+    # When it's searching files, if no inquiries from a client for `kick-out` seconds,
+    # The application kills the job by self.
+    kick-out: 60 # seconds
+
+
+logging:
+  file:
+    name: ./logs/rssportal.log
+    max-size: 100MB
+    max-history: 7
+
+---
+spring:
+  profiles: release
+  datasource:
+    # CKBS [set ip address]
+    url: jdbc:postgresql://Database/rssdb
+rssportal:
+  file-service-manager:
+    addr: localhost:8080
+  collect:
+    logBase: /CANON/LOG/autocollect
+    cacheBase: /CANON/LOG/cache
+    resultBase: /CANON/LOG/zip
+    max-threads: 4
+  file-collect-service:
+    # addr: localhost
+    retry: 1 # retry count
+    retry-interval: 100 # interval between each retry(msec)
+  logging:
+    root: /CANON/DEVLOG
+  downloader:
+    max-threads: 10
+  history:
+    cacheBase: /CANON/history
+  configuration:
+    path: /CANON/ENV/
+    structureFile: structure.json
+    categoriesFile: categories.json
+  machine-status:
+    period: 60 # seconds
+    root: /CANON/machines
+    keeping-period: 3600 # seconds
+  file-search:
+    max-jobs: 999
+    # When searching jobs finished, it stored the result into files in local storage.
+    # `storage-root` means the root path of the local storage.
+    storage-root: /CANON/search
+    # The result file keeps for `keeping-period` hours below.
+    keeping-period: 24 # hours
+    # Every `purge-interval` minutes, the application checks whether there are files to purge or not.
+    purge-interval: 10 # minutes
+    # When it's searching files, if no inquiries from a client for `kick-out` seconds,
+    # The application kills the job by self.
+    kick-out: 60 # seconds
+
+logging:

@@ -1,0 +1,13 @@
+spring:
+  profiles:
+    active: devesp
+server:
+  servlet:
+    contextPath:
+servicemanager:
+  sessionTimeout: 1440000 # 4h x 60m x 60s x 1000
+  structureFilePath: /CANON/ENV/structure.json
+  diskUsageDirectory: /CANON/LOG
+  admin-init-password: 5f4dcc3b5aa765d61d8327deb882cf99   # password
+  admin-init-password-filename: /CANON/ENV/admin_password.json
+  system: esp

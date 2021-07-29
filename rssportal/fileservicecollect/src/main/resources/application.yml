@@ -1,0 +1,22 @@
+
+spring:
+  profiles:
+    active: dev
+server:
+  servlet:
+    contextPath:
+logging:
+  pattern:
+    console: "%d{yyy-MM-dd HH:mm:ss.SSS} [%-30.-30logger{0}] %-5level | %msg%n"
+fileservice:
+  collect:
+    workDirectory: /CANON/WORKING
+    ftp:
+      downloadDirectory: /CANON/LOG/downloads
+    vftp:
+      downloadDirectory: /CANON/LOG/downloads
+    threadWaitTime: 2000
+    ftpPath: /
+    assignThread: 6
+    niceVal: 10
+

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="downloadList">
+
+    <select id="exists" resultType="boolean">
+        select exists (select * from information_schema.tables where table_schema='rsss' and table_name='download_list')
+    </select>
+
+    <select id="findItem" parameterType="integer" resultType="DownloadListVo">
+        select
+            id,
+            created,
+            status,
+            planid as planId,
+            path,
+            title,
+            machine
+        from rsss."download_list"
+        where id=#{id}
+    </select>
+
+    <select id="findCond" parameterType="hashmap" resultType="DownloadListVo">
+        select
+            id,
+            created,
+            status,
+            planid as planId,
+            path,
+            title,
+            machine
+        from rsss."download_list"
+        where
+        <if test="id!=null">
+            id=#{id} and
+        </if>
+        <if test="status!=null">
+            status=#{status} and
+        </if>
+            1=1
+    </select>
+
+    <select id="find" parameterType="hashmap" resultType="DownloadListVo">
+        select
+            id,
+            created,
+            status,
+            planid as planId,
+            path,
+            title,
+            machine
+        from rsss."download_list"
+        where planid = #{planId}
+        order by id desc
+        <if test="limit!=null">
+            limit #{limit}
+        </if>
+    </select>
+
+    <insert id="insert" parameterType="DownloadListVo">
+        insert into rsss."download_list" (
+            created,
+            status,
+            planid,
+            path,
+            title,
+            machine
+        ) values (
+            #{created},
+            #{status},
+            #{planId},
+            #{path},
+            #{title},
+            #{machine}
+        )
+    </insert>
+
+    <update id="update" parameterType="DownloadListVo">
+        update rsss."download_list" set
+            status = #{status}
+        where id=#{id}
+    </update>
+
+    <delete id="delete" parameterType="integer">
+        delete from rsss."download_list" where id=#{id}
+    </delete>
+
+</mapper>

@@ -1,0 +1,7 @@
+server:
+  servlet:
+    contextPath: /fsm
+  port: 8081
+logging:
+  level:
+    jp.co.canon.ckbs.eec.fs.collect: info

@@ -1,0 +1,3 @@
+logging:
+  level:
+    jp.co.canon.ckbs.eec.fs.collect: info
